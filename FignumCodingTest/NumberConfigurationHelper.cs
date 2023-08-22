@@ -56,9 +56,9 @@ namespace FignumCodingTest
 
             if (number % 2 == 0) return false;
 
-            var boundary = (int)Math.Floor(Math.Sqrt(number));
+            var limit = (int)Math.Floor(Math.Sqrt(number));
 
-            for (var i = 3; i <= boundary; i++)
+            for (var i = 3; i <= limit; i++)
             {
                 if (number % i == 0)
                 {
