@@ -19,7 +19,9 @@ namespace FignumCodingTest.Controllers
         [HttpPost]
         public async Task<ActionResult<Request>> Execute(Request request)
         {
-            var result = await NumberConfigurationHelper.RemovePrimeNumbersAndSort(request.InputStringNumber);
+            var result = await NumberConfigurationHelper.RemovePrimeNumbersFilter(request.InputStringNumber);
+
+            result = await NumberConfigurationHelper.SortFilter(result);
 
             if (result.CheckAndSortedList != null)
             {

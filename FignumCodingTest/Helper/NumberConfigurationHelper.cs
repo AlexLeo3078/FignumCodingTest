@@ -6,11 +6,11 @@ namespace FignumCodingTest.Helper
     public static class NumberConfigurationHelper
     {
         /// <summary>
-        /// Remove any prime numbers and sort.
+        /// Remove any prime numbers filter.
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns>A list of numbers or null</returns>
-        public static async Task<Response> RemovePrimeNumbersAndSort(string numbers)
+        public static async Task<Response> RemovePrimeNumbersFilter(string numbers)
         {
             Response response = new Response();
             List<int>? result = null;
@@ -40,7 +40,22 @@ namespace FignumCodingTest.Helper
             });
 
             response.Status = 200;
-            response.CheckAndSortedList = result?.OrderBy(x => x).ToList();
+            response.CheckAndSortedList = result;
+            return response;
+        }
+
+        /// <summary>
+        /// Sort a list of numbers
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns>A sorted list of numbers</returns>
+        public static async Task<Response> SortFilter(Response response)
+        {
+            if (response is { Status: 200, CheckAndSortedList: not null })
+            {
+                await Task.Run(response.CheckAndSortedList.Sort);
+            }
+
             return response;
         }
 

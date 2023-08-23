@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace FignumCodingTest.Models
+﻿namespace FignumCodingTest.Models
 {
     public class Response : BaseResponse
     {
