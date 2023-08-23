@@ -1,9 +1,11 @@
+using FignumCodingTest.Helper;
+using FignumCodingTest.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FignumCodingTest.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("fignum/[controller]")]
     public class NumberConfigurationController : ControllerBase
     {
 
@@ -15,16 +17,16 @@ namespace FignumCodingTest.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<int>>> Post(string numbers)
+        public async Task<ActionResult<Request>> Execute(Request request)
         {
-            var result = await NumberConfigurationHelper.CheckAndSort(numbers);
+            var result = await NumberConfigurationHelper.RemovePrimeNumbersAndSort(request.InputStringNumber);
 
-            if (result != null)
+            if (result.CheckAndSortedList != null)
             {
-                return Ok(result.OrderBy(x => x).ToList());
+                return Ok(result);
             }
 
-            return BadRequest($"The numbers string provided is not in a correct format {numbers} - eg: 1,2,3,4,5");
+            return BadRequest(result);
         }
     }
 }
